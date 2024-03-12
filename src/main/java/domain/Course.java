@@ -2,7 +2,6 @@ package domain;
 
 import java.time.DayOfWeek;
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -50,7 +49,7 @@ public class Course {
     @Column(nullable = false, name = "max_capacity")
     private int maxCapacity;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Student> students;
     
 

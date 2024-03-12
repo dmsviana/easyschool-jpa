@@ -1,4 +1,4 @@
-package usecases;
+package usecases.courses;
 
 import java.time.DayOfWeek;
 import java.util.List;

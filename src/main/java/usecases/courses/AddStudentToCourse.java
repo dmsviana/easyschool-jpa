@@ -1,4 +1,4 @@
-package usecases;
+package usecases.courses;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +12,7 @@ public class AddStudentToCourse {
         CourseService courseService = new CourseService();
 
         try {
-            courseService.addStudentToCourse(3L, 3L);
+            courseService.addStudentToCourse(1L, 1L);
             System.out.println("ALUNO ADICIONADO COM SUCESSO!");
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());

@@ -1,4 +1,4 @@
-package usecases;
+package usecases.fees;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -35,7 +35,7 @@ public abstract class User {
     @Email
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 16)
     @Size(min = 8, max = 16, message = "Password must be between 8 and 16 characters")
     private String password;
 

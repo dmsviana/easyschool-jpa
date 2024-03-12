@@ -1,4 +1,4 @@
-package usecases;
+package usecases.students;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,15 +14,11 @@ public class FindStudent {
 
         try {
             System.out.println("=================== LISTANDO TODOS OS ALUNOS =================== \n" + studentService.findAllStudents());
-            System.out.println("=================== BUSCANDO ALUNO PELO ID =================== \n" + studentService.findStudentById(2L));
+            System.out.println("=================== BUSCANDO ALUNO PELO ID =================== \n" + studentService.findStudentById(1L));
         } catch(Exception ex){
             System.out.println("Error: " + ex);
         }
        
-
-
-
-
     }
     
 }
