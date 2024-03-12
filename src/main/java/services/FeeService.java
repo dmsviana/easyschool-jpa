@@ -14,8 +14,8 @@ public class FeeService {
 
     private final FeeRepository feeRepository;
 
-    public FeeService(FeeRepository feeRepository) {
-        this.feeRepository = feeRepository;
+    public FeeService() {
+        this.feeRepository = new FeeRepository();
     }
 
     public void generateFees(Student student) {
@@ -34,8 +34,16 @@ public class FeeService {
         feeRepository.saveAll(fees);
     }
 
+    public Fee getFeeById(Long id){
+        return feeRepository.getFeeById(id);
+    }
+
     public void updateStatus(Fee fee){
         fee.setPaymentStatus(PaymentStatus.OVERDUE);
+    }
+
+    public void updateFee(Fee fee){
+        feeRepository.updateFee(fee);
     }
 
     public void verifyOverdueFees(){

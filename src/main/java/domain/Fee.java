@@ -56,4 +56,9 @@ public class Fee {
         this.paymentStatus = PaymentStatus.PENDING;
     }
 
+    @Override
+    public String toString() {
+        return "Fee [id=" + id + ", price=" + price + ", paidAt=" + paidAt + ", dueDate=" + dueDate + ", paymentStatus="
+                + paymentStatus;
+    }
 }

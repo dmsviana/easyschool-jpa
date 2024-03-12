@@ -1,5 +1,8 @@
 package usecases;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import domain.Address;
 import domain.Student;
 import services.StudentService;
@@ -7,12 +10,11 @@ import services.StudentService;
 public class CreateStudent {
 
     public static void main(String[] args) {
+        Logger.getLogger("org.hibernate").setLevel(Level.OFF);
 
         StudentService studentService = new StudentService();
 
         Student student = new Student();
-        Student newStudent = new Student();
-
         Address address = new Address();
 
         address.setCity("São Paulo");
@@ -23,22 +25,14 @@ public class CreateStudent {
         address.setReferencePoint("Casa");
 
         try {
-            student.setName("Diogo Marcelo");
-            student.setEmail("dmsviana@gmail.com");
+            student.setName("Gilberto Justino");
+            student.setEmail("gilberto@gmail.com");
             student.setPassword("12345678");
-            student.setPhoneNumber("83996586204");
-            student.setRegistration("20240312");
+            student.setPhoneNumber("83996586200");
+            student.setRegistration("202403180");
             student.setAddress(address);
 
-            newStudent.setName("Dener Matheus");
-            newStudent.setEmail("denerviana@gmail");
-            newStudent.setPassword("12345678");
-            newStudent.setPhoneNumber("83996586205");
-            newStudent.setRegistration("2024031");
-            newStudent.setAddress(address);
-
             studentService.createStudent(student);
-            studentService.createStudent(newStudent);
         } catch (Exception ex) {
             System.out.println("Error: " + ex);
         }

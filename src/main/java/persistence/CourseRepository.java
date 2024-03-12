@@ -1,23 +1,63 @@
 package persistence;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
-import domain.Fee;
-import domain.types.PaymentStatus;
+import domain.Course;
 import jakarta.persistence.EntityManager;
 
-public class FeeRepository extends Repository {
+public class CourseRepository extends Repository {
 
-
-    public void saveAll(List<Fee> fees) {
+    public void save(Course course) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            for (Fee fee : fees) {
-                em.persist(fee);
+            em.merge(course);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
+        } finally {
+            em.close();
+        }
+    }
+
+    public Course getCourseById(Long id){
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Course.class, id);
+        } catch (Exception ex){
+            throw ex;
+        } 
+        finally {
+            em.close();
+        }
+    }
+
+    public List<Course> getAllCourses() {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery("SELECT c FROM Course c", Course.class).getResultList();
+        } catch (Exception ex){
+            throw ex;
+        } 
+        finally {
+            em.close();
+        }
+    }
+
+    public void updateCourse(Course course){
+        EntityManager em = getEntityManager();
+        try {
+
+            if(getCourseById(course.getId()) == null){
+                throw new IllegalArgumentException("Course not found");
             }
+
+            course.setName("Nome atualizado");
+            course.setMaxCapacity(50);
+
+            em.getTransaction().begin();
+            em.merge(course);
         } catch (Exception ex) {
             em.getTransaction().rollback();
             throw ex;
@@ -27,52 +67,12 @@ public class FeeRepository extends Repository {
         }
     }
 
-    public List<Fee> findOverdueFees(LocalDate date){
-        EntityManager em = getEntityManager();
-        try {
-            return em.createQuery("SELECT f FROM Fee f WHERE f.dueDate < :date", Fee.class)
-                    .setParameter("date", date)
-                    .getResultList();
-        } catch (Exception ex){
-            throw ex;
-        } 
-        finally {
-            em.close();
-        }
-    }
-
-    public Fee getFeeById(Long id) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(Fee.class, id);
-        } catch (Exception ex){
-            throw ex;
-        } 
-        finally {
-            em.close();
-        }
-    }
-
-    public List<Fee> getAllFees() {
-        EntityManager em = getEntityManager();
-        try {
-            return em.createQuery("SELECT f FROM Fee f", Fee.class).getResultList();
-        } catch (Exception ex){
-            throw ex;
-        } 
-        finally {
-            em.close();
-        }
-    }
-
-    public void updateFee(Fee fee) {
+    public void deleteCourse(Long id){
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.find(Fee.class, fee.getId());
-            fee.setPaidAt(LocalDateTime.now());
-            fee.setPaymentStatus(PaymentStatus.PAID);
-            em.merge(fee);
+            Course course = em.find(Course.class, id);
+            em.remove(course);
         } catch (Exception ex) {
             em.getTransaction().rollback();
             throw ex;
@@ -81,21 +81,4 @@ public class FeeRepository extends Repository {
             em.close();
         }
     }
-
-    
-    public void deleteById(Long id) {
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-            Fee fee = em.find(Fee.class, id);
-            em.remove(fee);
-        } catch (Exception ex) {
-            em.getTransaction().rollback();
-            throw ex;
-        } finally {
-            em.getTransaction().commit();
-            em.close();
-        }
-    }
-    
 }

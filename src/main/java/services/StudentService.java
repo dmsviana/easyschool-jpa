@@ -3,7 +3,6 @@ package services;
 import java.util.List;
 
 import domain.Student;
-import persistence.FeeRepository;
 import persistence.StudentRepository;
 
 public class StudentService {
@@ -13,13 +12,12 @@ public class StudentService {
 
     public StudentService() {
         this.studentRepository = new StudentRepository();
-        this.feeService = new FeeService(new FeeRepository());
+        this.feeService = new FeeService();
     }
 
     public void createStudent(Student student){
-        Student studentAlreadyExists = studentRepository.getStudentById(student.getId());
-        if(studentAlreadyExists != null){
-            throw new IllegalArgumentException("Student already exists");
+        if (student.getId() != null) {
+            throw new IllegalArgumentException("Student ID must be null for new courses");
         }
 
         studentRepository.save(student);

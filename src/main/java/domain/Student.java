@@ -35,6 +35,7 @@ public class Student extends User {
                 "id=" + super.getId() +
                 ", name='" + super.getName() + '\'' +
                 ", email='" + super.getEmail() + '\'' +
+                ", fees='" + fees + '\'' +
                 '}';
     }
 
