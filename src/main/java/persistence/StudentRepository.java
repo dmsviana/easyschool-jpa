@@ -1,10 +1,9 @@
 package persistence;
 
+import java.util.List;
+
 import domain.Student;
 import jakarta.persistence.EntityManager;
-
-import java.util.List;
-import java.util.UUID;
 
 public class StudentRepository extends Repository {
 
@@ -18,13 +17,14 @@ public class StudentRepository extends Repository {
             System.out.println("Student has been created!");
         } catch(Exception ex){
             System.out.println("Error: " + ex);
+            ex.printStackTrace();
         } finally {
             em.close();
         }
 
     }
 
-    public Student getStudentById(UUID id){
+    public Student getStudentById(Long id){
         EntityManager em = getEntityManager();
         try {
             return em.find(Student.class, id);
@@ -46,5 +46,34 @@ public class StudentRepository extends Repository {
             em.close();
         }
         return null;
+    }
+
+    public void updateStudent(Long id){
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Student student = em.find(Student.class, id);
+            student.setName("Henry Monteiro");
+            student.setEmail("henry@gmail.com");
+            em.getTransaction().commit();
+        } catch (Exception ex){
+            System.out.println("Error: " + ex);
+        } finally {
+            em.close();
+        }
+    }
+
+    public void deleteStudentById(Long id){
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Student student = em.find(Student.class, id);
+            em.remove(student);
+            em.getTransaction().commit();
+        } catch (Exception ex){
+            System.out.println("Error: " + ex);
+        } finally {
+            em.close();
+        }
     }
 }

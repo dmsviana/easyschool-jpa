@@ -1,33 +1,41 @@
 package domain;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
-import java.util.UUID;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "tb_students")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
-public class Student {
+@DiscriminatorValue("student")
+public class Student extends User {
 
+    /* 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; */
 
-    @Column(nullable = false)
-    private String name;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Fee> fees;
 
-    @Column(nullable = false, unique = true)
-    @Email
-    private String email;
 
-    @Size(min = 8, max = 16, message = "Password must be between 8 and 16 characters")
-    private String password;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + super.getId() +
+                ", name='" + super.getName() + '\'' +
+                ", email='" + super.getEmail() + '\'' +
+                '}';
+    }
 
-    @Embedded
-    private Address address;
 }

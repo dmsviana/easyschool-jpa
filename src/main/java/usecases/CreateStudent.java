@@ -1,14 +1,15 @@
-package application;
+package usecases;
 
 import domain.Address;
 import domain.Student;
-import persistence.StudentRepository;
+import services.StudentService;
 
-public class StudentMain {
-
+public class CreateStudent {
 
     public static void main(String[] args) {
-        StudentRepository studentRepository = new StudentRepository();
+
+        StudentService studentService = new StudentService();
+
         Student student = new Student();
         Student newStudent = new Student();
 
@@ -25,20 +26,21 @@ public class StudentMain {
             student.setName("Diogo Marcelo");
             student.setEmail("dmsviana@gmail.com");
             student.setPassword("12345678");
+            student.setPhoneNumber("83996586204");
+            student.setRegistration("20240312");
             student.setAddress(address);
 
             newStudent.setName("Dener Matheus");
             newStudent.setEmail("denerviana@gmail");
             newStudent.setPassword("12345678");
+            newStudent.setPhoneNumber("83996586205");
+            newStudent.setRegistration("2024031");
             newStudent.setAddress(address);
 
-
-            studentRepository.save(student);
-            studentRepository.save(newStudent);
-            System.out.println(studentRepository.getAllStudents());
-        } catch(Exception ex){
+            studentService.createStudent(student);
+            studentService.createStudent(newStudent);
+        } catch (Exception ex) {
             System.out.println("Error: " + ex);
         }
     }
-
 }
