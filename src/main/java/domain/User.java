@@ -42,7 +42,7 @@ public abstract class User {
     @Column(nullable = false)
     private String registration;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 11)
     @Size(min = 11, max = 11, message = "Phone number must be 11 characters")
     private String phoneNumber;
 

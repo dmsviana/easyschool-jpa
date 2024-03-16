@@ -2,17 +2,16 @@ package persistence;
 
 import java.util.List;
 
-import domain.Student;
+import domain.Teacher;
 import jakarta.persistence.EntityManager;
 
-public class StudentRepository extends Repository {
+public class TeacherRepository extends Repository {
 
-    public void save(Student student) {
+    public void save(Teacher teacher) {
         EntityManager em = getEntityManager();
-
         try {
             em.getTransaction().begin();
-            em.merge(student);
+            em.merge(teacher);
             em.getTransaction().commit();
         } catch(Exception ex){
             System.out.println("Error: " + ex);
@@ -20,13 +19,12 @@ public class StudentRepository extends Repository {
         } finally {
             em.close();
         }
-
     }
 
-    public Student getStudentById(Long id){
+    public Teacher getTeacherById(Long id){
         EntityManager em = getEntityManager();
         try {
-            return em.find(Student.class, id);
+            return em.find(Teacher.class, id);
         } catch(Exception ex){
             System.out.println("Error: " + ex);
         } finally {
@@ -35,10 +33,10 @@ public class StudentRepository extends Repository {
         return null;
     }
 
-    public List<Student> getAllStudents(){
+    public List<Teacher> getAllTeachers(){
         EntityManager em = getEntityManager();
         try {
-            return em.createQuery("SELECT s FROM Student s", Student.class).getResultList();
+            return em.createQuery("SELECT t FROM Teacher t", Teacher.class).getResultList();
         } catch(Exception ex){
             System.out.println("Error: " + ex);
         } finally {
@@ -47,13 +45,12 @@ public class StudentRepository extends Repository {
         return null;
     }
 
-    public void updateStudent(Long id){
+    public void updateTeacher(Long id){
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            Student student = em.find(Student.class, id);
-            student.setName("Henry Monteiro");
-            student.setEmail("henry@gmail.com");
+            Teacher teacher = em.find(Teacher.class, id);
+            teacher.setName("Gilberto Justino");
             em.getTransaction().commit();
         } catch (Exception ex){
             System.out.println("Error: " + ex);
@@ -62,12 +59,12 @@ public class StudentRepository extends Repository {
         }
     }
 
-    public void deleteStudentById(Long id){
+    public void deleteTeacherById(Long id){
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            Student student = em.find(Student.class, id);
-            em.remove(student);
+            Teacher teacher = em.find(Teacher.class, id);
+            em.remove(teacher);
             em.getTransaction().commit();
         } catch (Exception ex){
             System.out.println("Error: " + ex);
