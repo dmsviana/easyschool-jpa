@@ -25,16 +25,17 @@ public class CreateStudent {
         address.setReferencePoint("Casa");
 
         try {
-            student.setName("Gilberto Justino");
-            student.setEmail("gilberto@gmail.com");
+            student.setName("teste Justino");
+            student.setEmail("teste@gmail.com");
             student.setPassword("12345678");
-            student.setPhoneNumber("83996586200");
-            student.setRegistration("202403180");
+            student.setPhoneNumber("83996586210");
+            student.setRegistration("202403120");
             student.setAddress(address);
 
             studentService.createStudent(student);
         } catch (Exception ex) {
             System.out.println("Error: " + ex);
+            ex.printStackTrace();
         }
     }
 }

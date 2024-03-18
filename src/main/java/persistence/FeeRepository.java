@@ -18,11 +18,11 @@ public class FeeRepository extends Repository {
             for (Fee fee : fees) {
                 em.persist(fee);
             }
+            em.getTransaction().commit();
         } catch (Exception ex) {
             em.getTransaction().rollback();
             throw ex;
         } finally {
-            em.getTransaction().commit();
             em.close();
         }
     }

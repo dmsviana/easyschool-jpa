@@ -12,10 +12,10 @@ public class DeleteCourse {
 
         CourseService courseService = new CourseService();
         try {
-            System.out.println("Deleting course...");
             courseService.deleteCourse(1L);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
     

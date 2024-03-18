@@ -12,7 +12,8 @@ public class StudentRepository extends Repository {
 
         try {
             em.getTransaction().begin();
-            em.merge(student);
+            em.persist(student);
+            em.flush();
             em.getTransaction().commit();
         } catch(Exception ex){
             System.out.println("Error: " + ex);

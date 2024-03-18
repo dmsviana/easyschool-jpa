@@ -13,13 +13,13 @@ public class UpdateFee {
 
         System.out.println(
                 "=================== ATUALIZANDO MENSALIDADE =================== \nINFORMAÇÕES DA MESMA ANTES DO UPDATE: \n"
-                        + feeService.getFeeById(10L) + "\n");
+                        + feeService.getFeeById(1L) + "\n");
 
         try {
-            feeService.updateFee(feeService.getFeeById(10L));
+            feeService.updateFee(feeService.getFeeById(1L));
             System.out.println(
                     "=================== INFORMAÇÕES DA MESMA APÓS O UPDATE =================== \n: \n"
-                            + feeService.getFeeById(10L));
+                            + feeService.getFeeById(1L));
         } catch (Exception ex) {
             System.out.println("Error: " + ex);
         }
